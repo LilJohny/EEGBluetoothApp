@@ -40,5 +40,4 @@ dependencies {
     implementation 'com.jakewharton.rx2:replaying-share:2.2.0'
     implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
     implementation 'com.jjoe64:graphview:4.2.2'
-    implementation 'org.jetbrains:kotlin-numpy:0.1.0'
 }
