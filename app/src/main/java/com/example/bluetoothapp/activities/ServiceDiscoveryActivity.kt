@@ -5,16 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bluetoothapp.R
 import com.example.bluetoothapp.SampleApplication
-import com.example.bluetoothapp.adapters.ScanResultsAdapter
-import com.polidea.rxandroidble2.exceptions.BleScanException
 
-import com.polidea.rxandroidble2.scan.ScanFilter
-import com.polidea.rxandroidble2.scan.ScanResult
-import com.polidea.rxandroidble2.scan.ScanSettings
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-
 
 
 import android.content.Context
@@ -24,7 +16,7 @@ import com.example.bluetoothapp.utils.*
 import com.example.bluetoothapp.utils.showSnackbarShort
 import com.polidea.rxandroidble2.RxBleDevice
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.activity_example3.*
+import kotlinx.android.synthetic.main.activity_services.*
 
 
 private const val EXTRA_MAC_ADDRESS = "extra_mac_address"
@@ -48,7 +40,7 @@ class ServiceDiscoveryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_example3)
+        setContentView(R.layout.activity_services)
         connect.setOnClickListener { onConnectToggleClick() }
 
         macAddress = intent.getStringExtra(EXTRA_MAC_ADDRESS)
@@ -75,9 +67,11 @@ class ServiceDiscoveryActivity : AppCompatActivity() {
     private fun onAdapterItemClick(item: DiscoveryResultsAdapter.AdapterItem) {
         when (item.type) {
             DiscoveryResultsAdapter.AdapterItem.CHARACTERISTIC -> {
+                if (this.bleDevice.name != "capled"){
                 startActivity(CharacteristicOperationActivity.newInstance(this, macAddress, item.uuid))
-                // If you want to check the alternative advanced implementation comment out the line above and uncomment one below
-//            startActivity(AdvancedCharacteristicOperationExampleActivity.newInstance(this, macAddress, item.uuid))
+                } else {
+                    startActivity(NotificationPlotActivity.newInstance(this, macAddress, item.uuid))
+                }
             }
             else -> showSnackbarShort(R.string.not_clickable)
         }

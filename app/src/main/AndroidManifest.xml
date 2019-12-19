@@ -55,6 +55,8 @@
         <activity
             android:name=".activities.LongWriteActivity"
             android:label="@string/title_example7" />
+        <activity android:name=".activities.NotificationPlotActivity"
+            android:label="CapLed"/>
 
     </application>
 

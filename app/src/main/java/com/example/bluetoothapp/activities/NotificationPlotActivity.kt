@@ -18,31 +18,30 @@ import com.jakewharton.rx.ReplayingShare
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
-import io.reactivex.android.schedulers.AndroidSchedulers
 import com.polidea.rxandroidble2.RxBleConnection
 import com.polidea.rxandroidble2.RxBleDevice
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_notifications.*
 import java.util.*
-import com.example.bluetoothapp.activities.PlotActivity as PlotActivity
-
+import kotlin.collections.ArrayList
 
 
 private const val EXTRA_MAC_ADDRESS = "extra_mac_address"
 
 private const val EXTRA_CHARACTERISTIC_UUID = "extra_uuid"
 
-class CharacteristicOperationActivity : AppCompatActivity() {
-
+class NotificationPlotActivity : AppCompatActivity() {
     companion object {
         fun newInstance(context: Context, macAddress: String, uuid: UUID) =
-            Intent(context, CharacteristicOperationActivity::class.java).apply {
+            Intent(context, NotificationPlotActivity::class.java).apply {
                 putExtra(EXTRA_MAC_ADDRESS, macAddress)
                 putExtra(EXTRA_CHARACTERISTIC_UUID, uuid)
             }
-        private val RANDOM = Random()
+
+
         fun toInt32(bytes: ByteArray): Int {
             var result = 0
             for (i in bytes.indices) {
@@ -51,8 +50,11 @@ class CharacteristicOperationActivity : AppCompatActivity() {
             return result
         }
     }
-
     private lateinit var characteristicUuid: UUID
+
+    private var lastX : Double = 0.0
+
+    private var series1: LineGraphSeries<DataPoint>? = null
 
     private val disconnectTriggerSubject = PublishSubject.create<Unit>()
 
@@ -61,16 +63,16 @@ class CharacteristicOperationActivity : AppCompatActivity() {
     private val connectionDisposable = CompositeDisposable()
 
     private lateinit var bleDevice: RxBleDevice
-    private var series1: LineGraphSeries<DataPoint>? = null
-    private var lastX : Double = 0.0
+
+    private lateinit var eegData:ArrayList<Int>
 
     private val inputBytes: ByteArray
         get() = write_input.text.toString().toByteArray()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notifications)
-        plot.setOnClickListener { startActivity(PlotActivity.newInstance(this)) }
+        setContentView(R.layout.activity_plot_notifications)
+        eegData = ArrayList()
+        plot.setOnClickListener { startPlotting() }
         val macAddress = intent.getStringExtra(EXTRA_MAC_ADDRESS)
         characteristicUuid = intent.getSerializableExtra(EXTRA_CHARACTERISTIC_UUID) as UUID
         bleDevice = SampleApplication.rxBleClient.getBleDevice(macAddress)
@@ -80,7 +82,9 @@ class CharacteristicOperationActivity : AppCompatActivity() {
         read.setOnClickListener { onReadClick() }
         write.setOnClickListener { onWriteClick() }
         notify.setOnClickListener { onNotifyClick() }
-        var y: Double
+    }
+    private fun startPlotting(){
+        onNotifyClick()
         val x: Double = 0.0
         val graph = findViewById<View>(R.id.graph) as GraphView
         val graph2 = findViewById<View>(R.id.graph2) as GraphView
@@ -96,7 +100,6 @@ class CharacteristicOperationActivity : AppCompatActivity() {
         graph2.addSeries(series1)
         val viewport = graph.viewport
     }
-
     private fun prepareConnectionObservable(): Observable<RxBleConnection> =
         bleDevice
             .establishConnection(false)
@@ -177,6 +180,7 @@ class CharacteristicOperationActivity : AppCompatActivity() {
 
     private fun onNotificationReceived(bytes: ByteArray) {
         showSnackbarShort("Change: ${bytes.toHex()}")
+        eegData.add(toInt32(bytes))
     }
 
     private fun onNotificationSetupFailure(throwable: Throwable) =
@@ -210,25 +214,5 @@ class CharacteristicOperationActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         connectionDisposable.clear()
-    }
-    override fun onResume() {
-        super.onResume()
-        Thread(Runnable {
-            for (i in 0..9999) {
-                runOnUiThread { addEntry() }
-                try {
-                    Thread.sleep(250)
-                } catch (e: InterruptedException) { //                        e.printStackTrace();
-                }
-            }
-        }).start()
-    }
-    private fun addEntry() {
-        series1!!.appendData(
-            DataPoint(
-                lastX++,
-                RANDOM.nextDouble() * 10.0
-            ), true, 100
-        )
     }
 }
