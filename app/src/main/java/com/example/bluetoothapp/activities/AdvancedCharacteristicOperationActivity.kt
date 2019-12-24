@@ -71,7 +71,7 @@ class AdvancedCharacteristicOperationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_characteristic_operations_advanced)
-
+        plot.setOnClickListener{startActivity(PlotActivity.newInstance(this))}
         val macAddress = intent.getStringExtra(EXTRA_MAC_ADDRESS)
         val characteristicUuid = intent.getSerializableExtra(EXTRA_CHARACTERISTIC_UUID) as UUID
         val bleDevice = SampleApplication.rxBleClient.getBleDevice(macAddress)
