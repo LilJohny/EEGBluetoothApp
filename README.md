@@ -57,4 +57,6 @@ ___
 - master branch - Here we have main UI work
 ### Activities in our app:
 - CharacteristicOperationActivity provides interface for interacting with BLE characteristics 
--
+- ScanActivity provides interface for scanning nearby BLE devices
+- ServiceDiscoveryActivity provides interface for discovering available services in particular BLE device
+- Entry activity -  ain’t activity of application, provides interface for all available functions of app
