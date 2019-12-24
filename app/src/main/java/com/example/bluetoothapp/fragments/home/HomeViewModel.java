@@ -1,4 +1,4 @@
-package com.example.bluetoothapp.activities.ui.home;
+package com.example.bluetoothapp.fragments.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

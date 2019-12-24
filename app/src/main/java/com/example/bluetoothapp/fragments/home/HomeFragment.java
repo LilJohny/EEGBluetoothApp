@@ -1,4 +1,4 @@
-package com.example.bluetoothapp.activities.ui.home;
+package com.example.bluetoothapp.fragments.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

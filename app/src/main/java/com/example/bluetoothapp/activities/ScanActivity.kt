@@ -1,4 +1,6 @@
 package com.example.bluetoothapp.activities
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bluetoothapp.R
@@ -20,6 +22,9 @@ import kotlinx.android.synthetic.main.activity_scan.scan_results
 import kotlinx.android.synthetic.main.activity_scan.scan_toggle_btn
 
 class ScanActivity : AppCompatActivity() {
+    companion object {
+        fun newInstance(context: Context) = Intent(context, ScanActivity::class.java)
+    }
 
     private val rxBleClient = SampleApplication.rxBleClient
 
