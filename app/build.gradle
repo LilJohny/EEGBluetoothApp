@@ -48,4 +48,6 @@ dependencies {
     implementation 'com.jjoe64:graphview:4.2.2'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.0-rc04'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.0-rc04'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+
 }
