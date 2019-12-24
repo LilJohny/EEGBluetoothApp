@@ -29,9 +29,11 @@ ___
 - Implemented Fast Fourier transform
 - Implemented Power Spectral density
 ___
+
 ### What is inside:
 Current version of mobile app for Android with functions, that are listed above:
 ___
-
+### Used Sources
+- [About EEG and how it shows current human state](https://www.epi.ch/wp-content/uploads/Artikel-Achermann_1-09.pdf)
 
 
