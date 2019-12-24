@@ -55,4 +55,8 @@
     <string name="error_unknown_error">Unknown error</string>
     <string name="error_no_message">No message found for reason=%d. Consider adding one.</string>
     <string name="plot">Show plot</string>
+    <string name="title_activity_entry">EntryActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
