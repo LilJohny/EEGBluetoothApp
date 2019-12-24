@@ -1,6 +1,7 @@
 package com.example.bluetoothapp.activities;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.bluetoothapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
