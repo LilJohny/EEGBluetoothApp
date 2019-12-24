@@ -73,10 +73,8 @@ class ScanActivity : AppCompatActivity() {
             .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
             .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES)
             .build()
-
+        //Can add custom filter
         val scanFilter = ScanFilter.Builder()
-//            .setDeviceAddress("B4:99:4C:34:DC:8B")
-            // add custom filters if needed
             .build()
 
         return rxBleClient.scanBleDevices(scanSettings, scanFilter)
@@ -104,7 +102,7 @@ class ScanActivity : AppCompatActivity() {
 
     public override fun onPause() {
         super.onPause()
-        // Stop scanning in onPause callback.
+
         if (isScanning) scanDisposable?.dispose()
     }
 }

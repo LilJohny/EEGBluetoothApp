@@ -19,7 +19,6 @@ internal class ScanResultsAdapter(
     private val data = mutableListOf<ScanResult>()
 
     fun addScanResult(bleScanResult: ScanResult) {
-        // Not the best way to ensure distinct devices, just for the sake of the demo.
         data.withIndex()
             .firstOrNull { it.value.bleDevice == bleScanResult.bleDevice }
             ?.let {

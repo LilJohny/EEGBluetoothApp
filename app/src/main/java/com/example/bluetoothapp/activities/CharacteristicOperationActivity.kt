@@ -80,21 +80,6 @@ class CharacteristicOperationActivity : AppCompatActivity() {
         read.setOnClickListener { onReadClick() }
         write.setOnClickListener { onWriteClick() }
         notify.setOnClickListener { onNotifyClick() }
-        var y: Double
-        val x: Double = 0.0
-        val graph = findViewById<View>(R.id.graph) as GraphView
-        val graph2 = findViewById<View>(R.id.graph2) as GraphView
-        series1 = LineGraphSeries()
-        series1!!.color = Color.RED
-        series1!!.backgroundColor = Color.YELLOW
-        graph.viewport.isXAxisBoundsManual = true
-        graph.viewport.setMinX(4.0)
-        graph.viewport.setMaxX(80.0)
-        graph.viewport.isScalable = true
-        graph.title = "Data from EEG"
-        graph.addSeries(series1)
-        graph2.addSeries(series1)
-        val viewport = graph.viewport
     }
 
     private fun prepareConnectionObservable(): Observable<RxBleConnection> =

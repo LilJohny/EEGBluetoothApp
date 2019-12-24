@@ -45,7 +45,6 @@ class RssiPeriodicActivity : AppCompatActivity() {
 
         connect_toggle.setOnClickListener { onConnectToggleClick() }
 
-        // How to listen for connection state changes
         bleDevice.observeConnectionStateChanges()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { onConnectionStateChange(it) }

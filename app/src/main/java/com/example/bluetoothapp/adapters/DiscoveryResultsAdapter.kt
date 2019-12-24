@@ -63,7 +63,7 @@ internal class DiscoveryResultsAdapter(
         data = services.bluetoothGattServices.flatMap { service ->
             // Add service
             val adapterItems = mutableListOf(AdapterItem(AdapterItem.SERVICE, service.serviceType, service.uuid))
-            // Add all characteristics of current service as subsequent items
+
             service.characteristics.map { characteristic ->
                 AdapterItem(AdapterItem.CHARACTERISTIC, characteristic.describeProperties(), characteristic.uuid)
             }.let { characteristicList ->

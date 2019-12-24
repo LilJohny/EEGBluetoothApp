@@ -67,11 +67,7 @@ class ServiceDiscoveryActivity : AppCompatActivity() {
     private fun onAdapterItemClick(item: DiscoveryResultsAdapter.AdapterItem) {
         when (item.type) {
             DiscoveryResultsAdapter.AdapterItem.CHARACTERISTIC -> {
-                if (this.bleDevice.name != "capled"){
-                startActivity(CharacteristicOperationActivity.newInstance(this, macAddress, item.uuid))
-                } else {
-                    startActivity(NotificationPlotActivity.newInstance(this, macAddress, item.uuid))
-                }
+                startActivity(AdvancedCharacteristicOperationActivity.newInstance(this, macAddress, item.uuid))
             }
             else -> showSnackbarShort(R.string.not_clickable)
         }

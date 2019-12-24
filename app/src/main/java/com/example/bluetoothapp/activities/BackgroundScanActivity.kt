@@ -60,8 +60,6 @@ class BackgroundScanActivity : AppCompatActivity() {
                     .build()
 
                 val scanFilter = ScanFilter.Builder()
-//                    .setDeviceAddress("5C:31:3E:BF:F7:34")
-                    // add custom filters if needed
                     .build()
 
                 rxBleClient.backgroundScanner.scanBleDeviceInBackground(callbackIntent, scanSettings, scanFilter)

@@ -46,8 +46,7 @@ class ConnectionActivity : AppCompatActivity() {
         title = getString(R.string.mac_address, macAddress)
         bleDevice = SampleApplication.rxBleClient.getBleDevice(macAddress)
 
-        // How to listen for connection state changes
-        // Note: it is meant for UI updates only — one should not observeConnectionStateChanges() with BLE connection logic
+
         bleDevice.observeConnectionStateChanges()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { onConnectionStateChange(it) }
@@ -66,7 +65,7 @@ class ConnectionActivity : AppCompatActivity() {
         }
     }
 
-    @TargetApi(21 /* Build.VERSION_CODES.LOLLIPOP */)
+    @TargetApi(21 )
     private fun onSetMtu() {
         newMtu.text.toString().toIntOrNull()?.let { mtu ->
             bleDevice.establishConnection(false)
