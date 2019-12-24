@@ -35,5 +35,7 @@ Current version of mobile app for Android with functions, that are listed above:
 ___
 ### Used Sources
 - [About EEG and how it shows current human state](https://www.epi.ch/wp-content/uploads/Artikel-Achermann_1-09.pdf)
-
-
+- Computational Frameworks for the Fast Fourier Transform by Charles Van Loan
+### Branches of repository
+- legacy branch - Here we have main functionality implemented
+- master branch - Here we have main UI work
