@@ -62,3 +62,6 @@ ___
 - ScanActivity provides interface for scanning nearby BLE devices
 - ServiceDiscoveryActivity provides interface for discovering available services in particular BLE device
 - Entry activity -  main activity of application, provides interface for all available functions of app
+
+### Interface examples:
+![alt text](https://github.com/LilJohny/EEGBluetoothApp/blob/master/Screenshots/9951FD70-5520-4D38-8F62-6D25E0BEC3F8.jpeg)
