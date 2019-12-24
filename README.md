@@ -1,10 +1,10 @@
 # EEGBluetoothApp
 ---
 #### Team, that works on this project:
-- ([Taras Rumezhak](https://github.com/tarasrumezhak))
-- ([Marian Dubei](https://github.com/MarianDubei))
-- ([Denys Ivanenko](https://github.com/LilJohny))
-- ([Max Kmet](https://github.com/MaxKmet))
+- [Taras Rumezhak](https://github.com/tarasrumezhak)
+- [Marian Dubei](https://github.com/MarianDubei)
+- [Denys Ivanenko](https://github.com/LilJohny)
+- [Max Kmet](https://github.com/MaxKmet)
 ---
 ___
 ## TODO:
