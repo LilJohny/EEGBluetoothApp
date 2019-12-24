@@ -15,50 +15,34 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".activities.EntryActivity"
-            android:label="@string/title_activity_entry">
+            android:name=".activities.EntryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.ScanActivity"
-            android:label="Bluetooth app">
+            android:name=".activities.ScanActivity">
 
         </activity>
         <activity android:name=".activities.DeviceActivity" />
         <activity
-            android:name=".activities.BackgroundScanActivity"
-            android:label="Bluetooth app" />
+            android:name=".activities.BackgroundScanActivity" />
 
         <receiver android:name=".receivers.ScanReceiver" />
 
         <activity
-            android:name=".activities.ConnectionActivity"
-            android:label="@string/title_example2" />
+            android:name=".activities.ConnectionActivity" />
         <activity
-            android:name=".activities.ServiceDiscoveryActivity"
-            android:label="@string/title_example3" />
+            android:name=".activities.ServiceDiscoveryActivity" />
         <activity
-            android:name=".activities.PlotActivity"
-            android:label="Plot" />
+            android:name=".activities.PlotActivity" />
         <activity
-            android:name=".activities.CharacteristicOperationActivity"
-            android:label="@string/title_example4" />
+            android:name=".activities.CharacteristicOperationActivity" />
         <activity
-            android:name=".activities.RssiPeriodicActivity"
-            android:label="@string/title_example5" />
-        <activity
-            android:name=".activities.LongWriteActivity"
-            android:label="@string/title_example7" />
-        <activity
-            android:name=".activities.AdvancedCharacteristicOperationActivity"
-            android:label="Adavanced Characteristic Operation" />
-        <activity
-            android:name=".activities.NotificationPlotActivity"
-            android:label="CapLed" />
+            android:name=".activities.RssiPeriodicActivity" />
+
+
     </application>
 
 </manifest>
