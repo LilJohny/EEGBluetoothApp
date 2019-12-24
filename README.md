@@ -45,6 +45,8 @@ Current version of mobile app for Android with functions, that are listed above.
   - After this you can start using the device
   - The data from electrodes is collected during the night and sent to the mobile device
   - In our application we use Fourier transform for our EEg data, thus we have the spectrogram
+  -In our application we use Fourier transform for our EEg data, thus we have the spectrogram
+Peaks in different frequencies in spectrogram are indicators of different phases of sleep. In particular, peaks at 15 Hz and below 5Hz are indicators of non-rapid eye movement sleep(non - REM) and slight increase in low frequencies (below 5Hz) compared to the state of waking is an indicator of rapid-eye movement sleep (REM).
   - After this we implement some algorithms to work with collected data
   - And after this a user can detailed information about his/her sleep
   - When there is the series of interactions (every night usage) the application shows some more general statisctics
