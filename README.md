@@ -64,4 +64,8 @@ ___
 - Entry activity -  main activity of application, provides interface for all available functions of app
 
 ### Interface examples:
+![alt text](https://github.com/LilJohny/EEGBluetoothApp/blob/master/Screenshots/A592B4AF-EDB8-4DAD-B369-98CE96F16123.jpeg)
+![alt text](https://github.com/LilJohny/EEGBluetoothApp/blob/master/Screenshots/D6C4FBCC-97FE-43C7-9A39-534736D62DA5.jpeg)
 ![alt text](https://github.com/LilJohny/EEGBluetoothApp/blob/master/Screenshots/9951FD70-5520-4D38-8F62-6D25E0BEC3F8.jpeg)
+![alt text](https://github.com/LilJohny/EEGBluetoothApp/blob/master/Screenshots/9AA0C005-1C30-4602-8493-85C7C43FBFF5.jpeg)
+![alt text](https://github.com/LilJohny/EEGBluetoothApp/blob/master/Screenshots/ECB3CDA9-8246-408C-80A2-5A3FEE8C14A8.jpeg)
