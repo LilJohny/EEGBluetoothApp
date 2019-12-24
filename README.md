@@ -55,3 +55,6 @@ ___
 ### Branches of repository
 - legacy branch - Here we have main functionality implemented
 - master branch - Here we have main UI work
+### Activities in our app:
+- CharacteristicOperationActivity provides interface for interacting with BLE characteristics 
+-
