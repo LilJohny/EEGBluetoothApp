@@ -28,6 +28,7 @@ ___
 - Implemented graphing of recieved data
 - Implemented Fast Fourier transform
 - Implemented Power Spectral density
+- Implemented Basic UI logic
 ___
 
 ### What is inside:
