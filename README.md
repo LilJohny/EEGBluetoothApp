@@ -6,8 +6,6 @@
 - ([Denys Ivanenko](https://github.com/LilJohny))
 - ([Max Kmet](https://github.com/MaxKmet))
 ---
-## First try
-As I have mentioned, our first try was on the first driver for 12V. Here you can view the [result](https://www.youtube.com/watch?v=lqymeNPksB4)
 ___
 ## TODO:
 |Until the presentation|Until the end of semester|Until the end of the year|
