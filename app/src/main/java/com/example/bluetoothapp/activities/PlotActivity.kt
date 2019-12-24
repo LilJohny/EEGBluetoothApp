@@ -27,7 +27,6 @@ class PlotActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plot)
-        val x: Double = 0.0
         val graph = findViewById<View>(R.id.graph) as GraphView
         val graph2 = findViewById<View>(R.id.graph2) as GraphView
         series1 = LineGraphSeries()

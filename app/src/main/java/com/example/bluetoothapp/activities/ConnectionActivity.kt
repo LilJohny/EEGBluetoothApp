@@ -44,7 +44,7 @@ class ConnectionActivity : AppCompatActivity() {
 
         val macAddress = intent.getStringExtra(EXTRA_MAC_ADDRESS)
         title = getString(R.string.mac_address, macAddress)
-        bleDevice = SampleApplication.rxBleClient.getBleDevice(macAddress)
+        bleDevice = SampleApplication.rxBleClient.getBleDevice(macAddress!!)
 
 
         bleDevice.observeConnectionStateChanges()
