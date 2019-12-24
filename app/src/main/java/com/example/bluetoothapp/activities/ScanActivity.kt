@@ -1,8 +1,12 @@
 package com.example.bluetoothapp.activities
+
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.bluetoothapp.R
 import com.example.bluetoothapp.SampleApplication
 import com.example.bluetoothapp.adapters.ScanResultsAdapter
@@ -10,18 +14,16 @@ import com.example.bluetoothapp.utils.isLocationPermissionGranted
 import com.example.bluetoothapp.utils.requestLocationPermission
 import com.example.bluetoothapp.utils.showError
 import com.polidea.rxandroidble2.exceptions.BleScanException
-
 import com.polidea.rxandroidble2.scan.ScanFilter
 import com.polidea.rxandroidble2.scan.ScanResult
 import com.polidea.rxandroidble2.scan.ScanSettings
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_scan.background_scan_btn
-import kotlinx.android.synthetic.main.activity_scan.scan_results
-import kotlinx.android.synthetic.main.activity_scan.scan_toggle_btn
+import kotlinx.android.synthetic.main.activity_scan.*
 
-class ScanActivity : AppCompatActivity() {
+
+class ScanActivity : Fragment() {
     companion object {
         fun newInstance(context: Context) = Intent(context, ScanActivity::class.java)
     }
@@ -31,21 +33,23 @@ class ScanActivity : AppCompatActivity() {
     private var scanDisposable: Disposable? = null
 
     private val resultsAdapter =
-        ScanResultsAdapter { startActivity(DeviceActivity.newInstance(this, it.bleDevice.macAddress)) }
+        ScanResultsAdapter { startActivity(DeviceActivity.newInstance(this.context!!, it.bleDevice.macAddress)) }
 
     private var hasClickedScan = false
 
     private val isScanning: Boolean
         get() = scanDisposable != null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scan)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View?{
+        //setContentView(R.layout.activity_scan)
         configureResultList()
-
-        background_scan_btn.setOnClickListener { startActivity(BackgroundScanActivity.newInstance(this)) }
         scan_toggle_btn.setOnClickListener { onScanToggleClick() }
+        return inflater.inflate(R.layout.activity_scan, container, false)
     }
+
 
     private fun configureResultList() {
         with(scan_results) {
@@ -59,7 +63,7 @@ class ScanActivity : AppCompatActivity() {
         if (isScanning) {
             scanDisposable?.dispose()
         } else {
-            if (isLocationPermissionGranted()) {
+            if (this.context!!.isLocationPermissionGranted()) {
                 scanBleDevices()
                     .observeOn(AndroidSchedulers.mainThread())
                     .doFinally { dispose() }

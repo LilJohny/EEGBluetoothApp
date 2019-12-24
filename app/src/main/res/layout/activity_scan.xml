@@ -7,12 +7,6 @@
     android:padding="@dimen/margin_standard">
 
     <Button
-        android:id="@+id/background_scan_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_scan_in_background" />
-
-    <Button
         android:id="@+id/scan_toggle_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
