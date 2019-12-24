@@ -17,6 +17,9 @@ ___
 ___
 ## Description of the problem
 Main goal of our project is to analyze sleep quality. We use portable electroencephalograph of our own consruction to get electrical signals from human`s head, then we use PSoC to transfer it to mobile device. After this, we analyze recieved data to provide information about sleep quality and overall health condition. 
+An EEG tracks and records brain wave patterns. Small metal discs with thin wires (electrodes) are placed on the scalp, and then send signals to a computer to record the results. Normal electrical activity in the brain makes a recognizable pattern. 
+Any synaptic activity generates a subtle electrical impulse. The burst of a single neuron is difficult to reliably detect without direct contact with it. But whenever thouthands of neurons fire in sync, they generate electrical field, which is strong enough to spread through tissue, bone and skull. So, it can be measured on head surface.
+We don't need any additional amplifer because we use ADS1299 which already has it.
 ___
 ## Documentation for the Mobile App
 ___
@@ -31,7 +34,20 @@ ___
 ___
 
 ### What is inside:
-Current version of mobile app for Android with functions, that are listed above:
+Current version of mobile app for Android with functions, that are listed above.
+
+### Application description:
+  - When you open our application you see the home page
+  - On the down bar you can choose the sections of oour app
+  - When you start using the device, you must go to settings section, turn the Bluetooth on and start scanning
+  - You can see available devices and click on the Sleep Monitor based on PSoC
+  - Also you can change some basic elements in the settings, for example choose which information and statistics will be shown
+  - After this you can start using the device
+  - The data from electrodes is collected during the night and sent to the mobile device
+  - In our application we use Fourier transform for our EEg data, thus we have the spectrogram
+  - After this we implement some algorithms to work with collected data
+  - And after this a user can detailed information about his/her sleep
+  - When there is the series of interactions (every night usage) the application shows some more general statisctics
 ___
 ### Used Sources
 - [About EEG and how it shows current human state](https://www.epi.ch/wp-content/uploads/Artikel-Achermann_1-09.pdf)
