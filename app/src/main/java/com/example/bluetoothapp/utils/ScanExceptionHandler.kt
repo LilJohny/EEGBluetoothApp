@@ -4,6 +4,7 @@ import android.app.Activity
 import com.example.bluetoothapp.R
 
 import android.util.Log
+import androidx.fragment.app.Fragment
 import com.polidea.rxandroidble2.exceptions.BleScanException
 import java.util.Date
 import java.util.Locale
@@ -42,6 +43,13 @@ internal fun Activity.showError(exception: BleScanException) =
         showSnackbarShort(errorMessage)
     }
 
+internal fun Fragment.showError(exception: BleScanException) =
+    getErrorMessage(exception).let { errorMessage ->
+        Log.e("Scanning", errorMessage, exception)
+        showSnackbarShort(errorMessage)
+    }
+
+
 private fun Activity.getErrorMessage(exception: BleScanException): String =
 // Special case, as there might or might not be a retry date suggestion
     if (exception.reason == BleScanException.UNDOCUMENTED_SCAN_THROTTLE) {
@@ -57,6 +65,24 @@ private fun Activity.getErrorMessage(exception: BleScanException): String =
         }
     }
 
+
+private fun Fragment.getErrorMessage(exception: BleScanException): String =
+// Special case, as there might or might not be a retry date suggestion
+    if (exception.reason == BleScanException.UNDOCUMENTED_SCAN_THROTTLE) {
+        getScanThrottleErrorMessage(exception.retryDateSuggestion)
+    } else {
+        // Handle all other possible errors
+        ERROR_MESSAGES[exception.reason]?.let { errorResId ->
+            getString(errorResId)
+        } ?: run {
+            // unknown error - return default message
+            Log.w("Scanning", String.format(getString(R.string.error_no_message), exception.reason))
+            getString(R.string.error_unknown_error)
+        }
+    }
+
+
+
 private fun Activity.getScanThrottleErrorMessage(retryDate: Date?): String =
     with(StringBuilder(getString(R.string.error_undocumented_scan_throttle))) {
         retryDate?.let { date ->
@@ -68,6 +94,20 @@ private fun Activity.getScanThrottleErrorMessage(retryDate: Date?): String =
         }
         toString()
     }
+
+private fun Fragment.getScanThrottleErrorMessage(retryDate: Date?): String =
+    with(StringBuilder(getString(R.string.error_undocumented_scan_throttle))) {
+        retryDate?.let { date ->
+            String.format(
+                Locale.getDefault(),
+                getString(R.string.error_undocumented_scan_throttle_retry),
+                date.secondsUntil
+            ).let { append(it) }
+        }
+        toString()
+    }
+
+
 
 private val Date.secondsUntil: Long
     get() = TimeUnit.MILLISECONDS.toSeconds(time - System.currentTimeMillis())

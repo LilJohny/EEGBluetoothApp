@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 
 private const val REQUEST_PERMISSION_COARSE_LOCATION = 101
 
@@ -18,6 +19,12 @@ internal fun Context.isLocationPermissionGranted(): Boolean = when {
 internal fun Activity.requestLocationPermission() =
     ActivityCompat.requestPermissions(
         this,
+        arrayOf(permission.ACCESS_COARSE_LOCATION),
+        REQUEST_PERMISSION_COARSE_LOCATION
+    )
+
+internal fun Fragment.requestLocationPermission() =
+    requestPermissions(
         arrayOf(permission.ACCESS_COARSE_LOCATION),
         REQUEST_PERMISSION_COARSE_LOCATION
     )

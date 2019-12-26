@@ -41,7 +41,7 @@ class ConnectionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_example2)
         connect_toggle.setOnClickListener { onConnectToggleClick() }
         set_mtu.setOnClickListener { onSetMtu() }
-
+        supportActionBar?.hide()
         val macAddress = intent.getStringExtra(EXTRA_MAC_ADDRESS)
         title = getString(R.string.mac_address, macAddress)
         bleDevice = SampleApplication.rxBleClient.getBleDevice(macAddress!!)

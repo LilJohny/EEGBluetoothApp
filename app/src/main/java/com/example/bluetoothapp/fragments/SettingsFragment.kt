@@ -1,44 +1,67 @@
-package com.example.bluetoothapp.activities
+package com.example.bluetoothapp.fragments
+
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.Color.WHITE
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.bluetoothapp.R
 import com.example.bluetoothapp.SampleApplication
+import com.example.bluetoothapp.activities.ScanActivity
 import com.example.bluetoothapp.adapters.ScanResultsAdapter
 import com.example.bluetoothapp.utils.isLocationPermissionGranted
 import com.example.bluetoothapp.utils.requestLocationPermission
 import com.example.bluetoothapp.utils.showError
 import com.polidea.rxandroidble2.exceptions.BleScanException
-
 import com.polidea.rxandroidble2.scan.ScanFilter
 import com.polidea.rxandroidble2.scan.ScanResult
 import com.polidea.rxandroidble2.scan.ScanSettings
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_scan.scan_results
-import kotlinx.android.synthetic.main.activity_scan.scan_toggle_btn
+import kotlinx.android.synthetic.main.activity_scan.*
+import pl.droidsonroids.gif.GifImageView
 
-class ScanActivity : AppCompatActivity() {
+
+class SettingsFragment : Fragment() {
 
     private val rxBleClient = SampleApplication.rxBleClient
 
     private var scanDisposable: Disposable? = null
 
     private val resultsAdapter =
-        ScanResultsAdapter { startActivity(DeviceActivity.newInstance(this, it.bleDevice.macAddress)) }
+        ScanResultsAdapter {
+            val deviceFragment = DeviceFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.nav_host_fragment, deviceFragment, "deviceFragment")
+                ?.addToBackStack(null)?.commit()
+        }
 
     private var hasClickedScan = false
 
     private val isScanning: Boolean
         get() = scanDisposable != null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scan)
-        configureResultList()
-        supportActionBar?.hide()
-        scan_toggle_btn.setOnClickListener { onScanToggleClick() }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        var intent : Intent = Intent(activity, ScanActivity::class.java)
+        startActivity(intent)
+        return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
+
+    //override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    //    super.onViewCreated(view, savedInstanceState)
+     //   configureResultList()
+     //   scan_toggle_btn.setOnClickListener { onScanToggleClick() }
+    //}
 
     private fun configureResultList() {
         with(scan_results) {
@@ -52,7 +75,7 @@ class ScanActivity : AppCompatActivity() {
         if (isScanning) {
             scanDisposable?.dispose()
         } else {
-            if (isLocationPermissionGranted()) {
+            if (this.context!!.isLocationPermissionGranted()) {
                 scanBleDevices()
                     .observeOn(AndroidSchedulers.mainThread())
                     .doFinally { dispose() }
@@ -91,14 +114,18 @@ class ScanActivity : AppCompatActivity() {
     private fun updateButtonUIState() =
         scan_toggle_btn.setText(if (isScanning) R.string.button_stop_scan else R.string.button_start_scan)
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         if (isLocationPermissionGranted(requestCode, grantResults) && hasClickedScan) {
             hasClickedScan = false
             scanBleDevices()
         }
     }
 
-    public override fun onPause() {
+    override fun onPause() {
         super.onPause()
 
         if (isScanning) scanDisposable?.dispose()

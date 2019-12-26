@@ -44,6 +44,7 @@ class CharacteristicOperationActivity : AppCompatActivity() {
             }
         private val RANDOM = Random()
         fun toInt32(bytes: ByteArray): Int {
+
             var result = 0
             for (i in bytes.indices) {
                 result = result or (bytes[i].toInt() shl 8 * i)
@@ -70,6 +71,7 @@ class CharacteristicOperationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notifications)
+        supportActionBar?.hide()
         plot.setOnClickListener { startActivity(PlotActivity.newInstance(this)) }
         val macAddress = intent.getStringExtra(EXTRA_MAC_ADDRESS)
         characteristicUuid = intent.getSerializableExtra(EXTRA_CHARACTERISTIC_UUID) as UUID

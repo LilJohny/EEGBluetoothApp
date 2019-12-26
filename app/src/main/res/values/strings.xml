@@ -60,4 +60,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="show_plot">SHOW PLOT</string>
+    <string name="monitor">Monitor</string>
+    <string name="settings">Settings</string>
 </resources>

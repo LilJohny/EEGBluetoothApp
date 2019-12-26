@@ -42,7 +42,7 @@ class ServiceDiscoveryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_services)
         connect.setOnClickListener { onConnectToggleClick() }
-
+        supportActionBar?.hide()
         macAddress = intent.getStringExtra(EXTRA_MAC_ADDRESS)
         supportActionBar!!.subtitle = getString(R.string.mac_address, macAddress)
         bleDevice = SampleApplication.rxBleClient.getBleDevice(macAddress)
