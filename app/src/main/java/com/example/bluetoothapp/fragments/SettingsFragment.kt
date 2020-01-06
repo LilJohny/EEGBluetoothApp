@@ -1,17 +1,12 @@
 package com.example.bluetoothapp.fragments
 
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.Color.WHITE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.bluetoothapp.R
 import com.example.bluetoothapp.SampleApplication
-import com.example.bluetoothapp.activities.ScanActivity
 import com.example.bluetoothapp.adapters.ScanResultsAdapter
 import com.example.bluetoothapp.utils.isLocationPermissionGranted
 import com.example.bluetoothapp.utils.requestLocationPermission
@@ -24,7 +19,6 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_scan.*
-import pl.droidsonroids.gif.GifImageView
 
 
 class SettingsFragment : Fragment() {
@@ -51,17 +45,14 @@ class SettingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        var intent : Intent = Intent(activity, ScanActivity::class.java)
-        startActivity(intent)
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+        return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
-    //override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    //    super.onViewCreated(view, savedInstanceState)
-     //   configureResultList()
-     //   scan_toggle_btn.setOnClickListener { onScanToggleClick() }
-    //}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        configureResultList()
+        scan_toggle_btn.setOnClickListener { onScanToggleClick() }
+    }
 
     private fun configureResultList() {
         with(scan_results) {
