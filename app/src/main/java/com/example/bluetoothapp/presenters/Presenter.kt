@@ -11,7 +11,6 @@ import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.Single
 import java.util.*
-import java.util.Arrays.asList
 
 private val clientCharacteristicConfigDescriptorUuid = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
 
@@ -192,6 +191,7 @@ private fun BluetoothGattCharacteristic.enableNotifyOrIndicate(property: Int): O
              * the behaviour of Observable that first emits or terminates and it will be checking both
              * notifyClicks and indicateClicks
              */
+
             Observable.never()
         } else {
             // only the first click to source clicks Observable is taken into account
@@ -215,7 +215,7 @@ private fun selectNotificationOrIndication(
     enablingNotifyClicks: Observable<Boolean>,
     disableNotifyClicks: Observable<Boolean>
 ): Observable<PresenterEvent> =
-    Observable.amb(asList(enableNotifyClicksObservable, enableIndicateClicksObservable))
+    Observable.amb(listOf(enableNotifyClicksObservable, enableIndicateClicksObservable))
         .flatMap { isIndication ->
             if (isIndication) {
                 // we clicked indication
@@ -286,7 +286,7 @@ private fun <T> takeUntil(beforeEmission: Observable<*>, afterEmission: Observab
                 .take(1)
                 .ignoreElements()
                 .andThen(afterEmission).let {
-                    Observable.amb(asList(publishedObservable, publishedObservable.takeUntil(beforeEmission)))
+                    Observable.amb(listOf(publishedObservable, publishedObservable.takeUntil(beforeEmission)))
                         .takeUntil(it)
                 }
         }

@@ -39,8 +39,7 @@ class PlotActivity : AppCompatActivity() {
         graph.viewport.isScalable = true
         graph.title = "Data from EEG"
         graph.addSeries(series1)
-        //graph2.addSeries(series1)
-        val viewport = graph.viewport
+        graph.viewport
     }
     override fun onResume() {
         super.onResume()

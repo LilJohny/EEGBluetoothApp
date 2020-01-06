@@ -16,7 +16,7 @@ class MonitorFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var intent : Intent = Intent(activity, PlotActivity::class.java)
+        var intent = Intent(activity, PlotActivity::class.java)
         startActivity(intent)
         return inflater.inflate(R.layout.activity_plot, container, false)
     }
