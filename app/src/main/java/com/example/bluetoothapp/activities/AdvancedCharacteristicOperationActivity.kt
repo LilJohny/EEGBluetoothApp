@@ -80,7 +80,7 @@ class AdvancedCharacteristicOperationActivity : AppCompatActivity() {
 
         val sharedNotifyButtonClicks = notify_button.activatedClicksObservable().share()
         val sharedIndicateButtonClicks = indicate_button.activatedClicksObservable().share()
-        show_plot.setOnClickListener{startActivity(PlotActivity.newInstance(this))}
+        //show_plot.setOnClickListener{startActivity(PlotActivity.newInstance(this))}
 
 
         val (connect, connecting, disconnect) =

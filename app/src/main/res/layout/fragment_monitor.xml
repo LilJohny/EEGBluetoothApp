@@ -11,18 +11,17 @@
         android:padding="@dimen/margin_standard">
 
 
-        <Button
-            android:id="@+id/scan_toggle_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_start_scan" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/scan_results"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="56dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:seriesColor="#9C27B0"
+            app:seriesType="line" />
 
 
 

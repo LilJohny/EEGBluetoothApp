@@ -31,7 +31,7 @@ class SettingsFragment : Fragment() {
         ScanResultsAdapter {
             val deviceFragment = DeviceFragment()
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.nav_host_fragment, deviceFragment, "deviceFragment")
+                ?.replace(R.id.entry_container, deviceFragment, "deviceFragment")
                 ?.addToBackStack(null)?.commit()
         }
 
