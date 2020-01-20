@@ -21,26 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.ScanActivity">
-
-        </activity>
-        <activity android:name=".activities.DeviceActivity" />
-        <activity
-            android:name=".activities.BackgroundScanActivity" />
-
-        <receiver android:name=".receivers.ScanReceiver" />
-
-        <activity
-            android:name=".activities.ConnectionActivity" />
-        <activity
-            android:name=".activities.ServiceDiscoveryActivity" />
-        <activity
-            android:name=".activities.PlotActivity" />
-        <activity
-            android:name=".activities.CharacteristicOperationActivity" />
-        <activity
-            android:name=".activities.RssiPeriodicActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
