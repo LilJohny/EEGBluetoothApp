@@ -25,6 +25,5 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,6 +24,5 @@
             app:seriesType="line" />
 
 
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
