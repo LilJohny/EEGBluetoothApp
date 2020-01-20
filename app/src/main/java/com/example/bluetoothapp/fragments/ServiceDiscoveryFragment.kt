@@ -7,14 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.bluetoothapp.R
 import com.example.bluetoothapp.SampleApplication
-import com.example.bluetoothapp.activities.AdvancedCharacteristicOperationActivity
 import com.example.bluetoothapp.adapters.DiscoveryResultsAdapter
 import com.example.bluetoothapp.utils.isConnected
-import com.example.bluetoothapp.utils.showSnackbarShort
+import com.example.bluetoothapp.utils.showToastShort
 import com.polidea.rxandroidble2.RxBleDevice
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.activity_services.*
+import kotlinx.android.synthetic.main.fragment_services.*
 
 
 private const val EXTRA_MAC_ADDRESS = "extra_mac_address"
@@ -58,7 +57,7 @@ class ServiceDiscoveryFragment : Fragment() {
             .doFinally { updateUI() }
             .subscribe(
                 { resultsAdapter.swapScanResult(it) },
-                { showSnackbarShort("Connection error: $it") })
+                { showToastShort("Connection error: $it") })
             .let { discoveryDisposable.add(it) }
     }
 
@@ -75,7 +74,7 @@ class ServiceDiscoveryFragment : Fragment() {
                     ?.addToBackStack(TAG)
                     ?.commit()
             }
-            else -> showSnackbarShort(R.string.not_clickable)
+            else -> showToastShort(R.string.not_clickable)
         }
     }
 

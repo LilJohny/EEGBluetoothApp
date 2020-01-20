@@ -40,13 +40,13 @@ private val ERROR_MESSAGES = mapOf(
 internal fun Activity.showError(exception: BleScanException) =
     getErrorMessage(exception).let { errorMessage ->
         Log.e("Scanning", errorMessage, exception)
-        showSnackbarShort(errorMessage)
+        showToastShort(errorMessage)
     }
 
 internal fun Fragment.showError(exception: BleScanException) =
     getErrorMessage(exception).let { errorMessage ->
         Log.e("Scanning", errorMessage, exception)
-        showSnackbarShort(errorMessage)
+        showToastShort(errorMessage)
     }
 
 

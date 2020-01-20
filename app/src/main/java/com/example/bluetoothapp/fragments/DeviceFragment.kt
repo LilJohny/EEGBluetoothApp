@@ -29,8 +29,8 @@ class DeviceFragment : Fragment() {
             var connectionFragment = ConnectionFragment()
             connectionFragment.arguments = arguments
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.entry_container, connectionFragment, TAG)
-                ?.addToBackStack(TAG)
+                ?.replace(R.id.entry_container, connectionFragment, "connectionFragment")
+                ?.addToBackStack("connectionFragment")
                 ?.commit()
 
         })
@@ -39,6 +39,7 @@ class DeviceFragment : Fragment() {
             discoveryFragment.arguments = arguments
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.entry_container, discoveryFragment, "discoveryFragment")
+                ?.addToBackStack("discoveryFragment")
                 ?.commit()
         })
     }

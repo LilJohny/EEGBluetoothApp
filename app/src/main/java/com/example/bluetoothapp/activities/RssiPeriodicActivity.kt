@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.bluetoothapp.R
 import com.example.bluetoothapp.SampleApplication
 import com.example.bluetoothapp.utils.isConnected
-import com.example.bluetoothapp.utils.showSnackbarShort
+import com.example.bluetoothapp.utils.showToastShort
 import com.polidea.rxandroidble2.RxBleConnection
 import com.polidea.rxandroidble2.RxBleDevice
 import io.reactivex.Observable
@@ -62,7 +62,7 @@ class RssiPeriodicActivity : AppCompatActivity() {
                     Observable.interval(2, SECONDS).flatMapSingle { connection.readRssi() }
                 }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ updateRssi(it) }, { showSnackbarShort("Connection error: $it") })
+                .subscribe({ updateRssi(it) }, { showToastShort("Connection error: $it") })
                 .let { connectionDisposable = it }
         }
     }

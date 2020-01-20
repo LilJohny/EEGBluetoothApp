@@ -18,7 +18,8 @@ import com.polidea.rxandroidble2.scan.ScanSettings
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_scan.*
+import kotlinx.android.synthetic.main.fragment_settings.*
+
 
 private const val EXTRA_MAC_ADDRESS = "extra_mac_address"
 private const val TAG = "deviceFragment"

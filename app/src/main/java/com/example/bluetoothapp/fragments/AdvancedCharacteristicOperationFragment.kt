@@ -18,7 +18,7 @@ import com.example.bluetoothapp.presenters.InfoEvent
 import com.example.bluetoothapp.presenters.PresenterEvent
 import com.example.bluetoothapp.presenters.ResultEvent
 import com.example.bluetoothapp.presenters.Type
-import com.example.bluetoothapp.utils.showSnackbarShort
+import com.example.bluetoothapp.utils.showToastShort
 import com.example.bluetoothapp.utils.toHex
 import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
@@ -91,7 +91,7 @@ class AdvancedCharacteristicOperationFragment : Fragment() {
         val writeObservable =
             write_button.activatedClicksObservable()
                 .map { inputBytes }
-                .doOnError { throwable -> showSnackbarShort("Could not parse input: $throwable") }
+                .doOnError { throwable -> showToastShort("Could not parse input: $throwable") }
                 .retryWhen { it }
 
         presenterEventObservable = prepareActivityLogic(
@@ -130,7 +130,7 @@ class AdvancedCharacteristicOperationFragment : Fragment() {
     private fun PresenterEvent.handleEvent() {
         Log.i(TAG, toString())
         when (this) {
-            is InfoEvent -> showSnackbarShort(infoText)
+            is InfoEvent -> showToastShort(infoText)
             is CompatibilityModeEvent -> handleCompatibility()
             is ResultEvent -> handleResult()
             is ErrorEvent -> handleError()
@@ -166,9 +166,9 @@ class AdvancedCharacteristicOperationFragment : Fragment() {
                 read_hex_output.text = result.toByteArray().toHex()
                 write_input.setText(result.toByteArray().toHex())
             }
-            Type.WRITE -> showSnackbarShort("Write success")
-            Type.NOTIFY -> showSnackbarShort("Notification: ${result.toByteArray().toHex()}")
-            Type.INDICATE -> showSnackbarShort("Indication: ${result.toByteArray().toHex()}")
+            Type.WRITE -> showToastShort("Write success")
+            Type.NOTIFY -> showToastShort("Notification: ${result.toByteArray().toHex()}")
+            Type.INDICATE -> showToastShort("Indication: ${result.toByteArray().toHex()}")
         }
     }
 
@@ -180,7 +180,7 @@ class AdvancedCharacteristicOperationFragment : Fragment() {
             Type.WRITE -> "Write error: $error"
             Type.NOTIFY -> "Notifications error: $error"
             Type.INDICATE -> "Indications error: $error"
-        }.let { showSnackbarShort(it) }
+        }.let { showToastShort(it) }
     }
 }
 
