@@ -1,29 +1,48 @@
 package com.example.bluetoothapp.fragments
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.bluetoothapp.R
-import com.example.bluetoothapp.activities.DeviceActivity
+import kotlinx.android.synthetic.main.fragment_device.*
 
 
 private const val EXTRA_MAC_ADDRESS = "extra_mac_address"
+private const val TAG = "connectionFragment"
 
-class DeviceFragment:Fragment(){
+class DeviceFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        return inflater.inflate(R.layout.fragment_device, container, false)
     }
-    companion object {
-        fun newInstance(context: Context, macAddress: String): Intent =
-            Intent(context, DeviceActivity::class.java).apply { putExtra(EXTRA_MAC_ADDRESS, macAddress) }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val macAddress = arguments?.getString(EXTRA_MAC_ADDRESS)
+        connect.setOnClickListener(View.OnClickListener {
+            var connectionFragment = ConnectionFragment()
+            connectionFragment.arguments = arguments
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.entry_container, connectionFragment, TAG)
+                ?.addToBackStack(TAG)
+                ?.commit()
+
+        })
+        discovery.setOnClickListener(View.OnClickListener {
+            var discoveryFragment = ServiceDiscoveryFragment()
+            discoveryFragment.arguments = arguments
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.entry_container, discoveryFragment, "discoveryFragment")
+                ?.commit()
+        })
     }
+
+
 
 }

@@ -20,6 +20,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_scan.*
 
+private const val EXTRA_MAC_ADDRESS = "extra_mac_address"
+private const val TAG = "deviceFragment"
 
 class SettingsFragment : Fragment() {
 
@@ -29,10 +31,14 @@ class SettingsFragment : Fragment() {
 
     private val resultsAdapter =
         ScanResultsAdapter {
-            val deviceFragment = DeviceFragment()
+            var deviceFragment = DeviceFragment()
+            var args = Bundle()
+            args.putString(EXTRA_MAC_ADDRESS, it.bleDevice.macAddress )
+            deviceFragment.arguments = args
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.entry_container, deviceFragment, "deviceFragment")
-                ?.addToBackStack(null)?.commit()
+                ?.replace(R.id.entry_container, deviceFragment, TAG)
+                ?.addToBackStack(TAG)
+                ?.commit()
         }
 
     private var hasClickedScan = false

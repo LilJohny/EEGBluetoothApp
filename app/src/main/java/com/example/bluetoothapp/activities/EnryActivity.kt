@@ -1,13 +1,14 @@
 package com.example.bluetoothapp.activities
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.bluetoothapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class EntryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +27,15 @@ class EntryActivity : AppCompatActivity() {
             Navigation.findNavController(this, R.id.nav_host_fragment)
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         NavigationUI.setupWithNavController(navView, navController)
+    }
+    override fun onBackPressed() {
+        val fm: FragmentManager = supportFragmentManager
+        if(fm.backStackEntryCount > 0){
+            fm.popBackStackImmediate()
+        }
+        else{
+            super.onBackPressed()
+        }
     }
 
 }
