@@ -106,11 +106,10 @@
         android:textSize="@dimen/text_size_standard"
         android:visibility="invisible"
         tools:visibility="visible" />
-
     <Button
-        android:id="@+id/show_plot"
+        android:id="@+id/write_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/show_plot" />
+        android:text="@string/write_data_to_file"/>
 
 </LinearLayout>

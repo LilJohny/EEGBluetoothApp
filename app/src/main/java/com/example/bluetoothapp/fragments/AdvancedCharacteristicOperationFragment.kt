@@ -1,5 +1,6 @@
 package com.example.bluetoothapp.fragments
 
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.example.bluetoothapp.R
 import com.example.bluetoothapp.SampleApplication
+import com.example.bluetoothapp.activities.EntryActivity
 
 import com.example.bluetoothapp.presenters.*
 import com.example.bluetoothapp.presenters.CompatibilityModeEvent
@@ -18,6 +20,7 @@ import com.example.bluetoothapp.presenters.InfoEvent
 import com.example.bluetoothapp.presenters.PresenterEvent
 import com.example.bluetoothapp.presenters.ResultEvent
 import com.example.bluetoothapp.presenters.Type
+import com.example.bluetoothapp.utils.Writer
 import com.example.bluetoothapp.utils.showToastShort
 import com.example.bluetoothapp.utils.toHex
 import com.jakewharton.rxbinding3.view.clicks
@@ -26,19 +29,34 @@ import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_characteristics_operations.*
+import java.io.File
 import java.util.*
+import kotlin.collections.ArrayList
 
 private const val EXTRA_MAC_ADDRESS = "extra_mac_address"
 private val TAG = "CharacteristicOperation"
 private const val EXTRA_CHARACTERISTIC_UUID = "extra_uuid"
 
 class AdvancedCharacteristicOperationFragment : Fragment() {
+    companion object {
+
+        fun littleEndianConversion(bytes: ByteArray): Int {
+            var result = 0
+            for (i in bytes.indices) {
+                result = result or (bytes[i].toInt() shl 8 * i)
+            }
+            return result
+        }
+    }
+    private lateinit var  filesDir:File
     private var activityFlowDisposable: Disposable? = null
 
     private lateinit var presenterEventObservable: Observable<PresenterEvent>
 
     private val inputBytes: ByteArray
         get() = write_input.text.toString().toByteArray()
+
+    private var recievedValues = ArrayList<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,12 +68,11 @@ class AdvancedCharacteristicOperationFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        //super.onViewCreated(view, savedInstanceState)
 
         val macAddress = arguments?.getString(EXTRA_MAC_ADDRESS)
         val characteristicUuid = UUID.fromString(arguments?.getString(EXTRA_CHARACTERISTIC_UUID))
         val bleDevice = SampleApplication.rxBleClient.getBleDevice(macAddress!!)
-
 
         val sharedConnectButtonClicks = connect_button.activatedClicksObservable().share()
 
@@ -109,6 +126,9 @@ class AdvancedCharacteristicOperationFragment : Fragment() {
             settingIndication,
             teardownIndication
         )
+
+        filesDir = this.view?.context?.filesDir!!
+
     }
 
 
@@ -167,7 +187,13 @@ class AdvancedCharacteristicOperationFragment : Fragment() {
                 write_input.setText(result.toByteArray().toHex())
             }
             Type.WRITE -> showToastShort("Write success")
-            Type.NOTIFY -> showToastShort("Notification: ${result.toByteArray().toHex()}")
+            Type.NOTIFY -> {
+                showToastShort("Notification: ${result.toByteArray().toHex()}")
+                recievedValues.add(littleEndianConversion((result.toByteArray())))
+                Writer.writeFile(recievedValues.toString(),filesDir, "data.txt")
+
+                //showToastShort(recievedValues.toString())
+            }
             Type.INDICATE -> showToastShort("Indication: ${result.toByteArray().toHex()}")
         }
     }

@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.bluetoothapp.R
+import com.example.bluetoothapp.utils.Writer
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
+import java.io.File
 import java.util.*
 
 class MonitorFragment : Fragment(){
@@ -25,6 +27,8 @@ class MonitorFragment : Fragment(){
     }
     private var series1: LineGraphSeries<DataPoint>? = null
     private var lastX : Double = 0.0
+    private lateinit var line:List<String>
+    private var i = 0
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val graph = this.view?.findViewById<View>(R.id.graph) as GraphView
         series1 = LineGraphSeries()
@@ -37,6 +41,8 @@ class MonitorFragment : Fragment(){
         graph.title = "Data from EEG"
         graph.addSeries(series1)
         graph.viewport
+        line  = Writer.readFile(this.view!!.context.filesDir,"data.txt")[0].replace("[","").replace("]","").split(",")
+
     }
 
     override fun onResume() {
@@ -45,7 +51,7 @@ class MonitorFragment : Fragment(){
             for (i in 0..9999) {
                 activity?.runOnUiThread { addEntry() }
                 try {
-                    Thread.sleep(250)
+                    //Thread.sleep(250)
                 } catch (e: InterruptedException) { //                        e.printStackTrace();
                 }
             }
@@ -55,9 +61,13 @@ class MonitorFragment : Fragment(){
         series1!!.appendData(
             DataPoint(
                 lastX++,
-                RANDOM.nextDouble() * 10.0
+                nextDouble() * 10.0
             ), true, 100
         )
+    }
+    private fun nextDouble():Double{
+
+        return RANDOM.nextDouble()*line[i].toDouble()
     }
 
 }

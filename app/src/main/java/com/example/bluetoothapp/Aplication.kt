@@ -21,6 +21,7 @@ class SampleApplication : Application() {
             .setUuidsLogSetting(LogConstants.UUIDS_FULL)
             .setShouldLogAttributeValues(true)
             .build()
+
         )
     }
 }
