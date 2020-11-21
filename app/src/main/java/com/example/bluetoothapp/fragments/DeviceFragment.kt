@@ -26,7 +26,7 @@ class DeviceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val macAddress = arguments?.getString(EXTRA_MAC_ADDRESS)
         connect.setOnClickListener(View.OnClickListener {
-            var connectionFragment = ConnectionFragment()
+            val connectionFragment = ConnectionFragment()
             connectionFragment.arguments = arguments
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.entry_container, connectionFragment, "connectionFragment")
@@ -35,7 +35,7 @@ class DeviceFragment : Fragment() {
 
         })
         discovery.setOnClickListener(View.OnClickListener {
-            var discoveryFragment = ServiceDiscoveryFragment()
+            val discoveryFragment = ServiceDiscoveryFragment()
             discoveryFragment.arguments = arguments
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.entry_container, discoveryFragment, "discoveryFragment")

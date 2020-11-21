@@ -1,7 +1,9 @@
 package classifier
 
 import org.jtransforms.fft.DoubleFFT_1D
-import java.util.*
+import kotlin.math.cos
+import kotlin.math.log10
+import kotlin.math.min
 
 /******************************************************************************
  *  Compilation:  javac FFT.java
@@ -77,7 +79,7 @@ class FFT(// -------------------------------------------------------------------
         winMean /= inputLength.toDouble()
 
         // De-mean and apply Hamming window
-        for (i in 0 until Math.min(inputLength, fftLength)) {
+        for (i in 0 until min(inputLength, fftLength)) {
             Y[i] = hammingWin[i] * (x[i] - winMean)
         }
 
@@ -125,7 +127,7 @@ class FFT(// -------------------------------------------------------------------
         winMean /= inputLength.toDouble()
 
         // De-mean and apply Hamming window
-        for (i in 0 until Math.min(inputLength, fftLength)) {
+        for (i in 0 until min(inputLength, fftLength)) {
             Y[i] = hammingWin[i] * (x[i] - winMean)
         }
 
@@ -149,7 +151,7 @@ class FFT(// -------------------------------------------------------------------
 
         // Compute log-power
         for (i in 0 until nbFFTPoints) {
-            logpower[i] = Math.log10(real[i] * real[i] + imag[i] * imag[i]) // log squared
+            logpower[i] = log10(real[i] * real[i] + imag[i] * imag[i]) // log squared
             // complex magnitude
         }
         return logpower
@@ -161,7 +163,7 @@ class FFT(// -------------------------------------------------------------------
         // See [http://www.mathworks.com/help/signal/ref/hamming.html]
         val w = DoubleArray(L)
         for (n in 0 until L) {
-            w[n] = 0.54 - 0.46 * Math.cos(2 * Math.PI * n / (L - 1))
+            w[n] = 0.54 - 0.46 * cos(2 * Math.PI * n / (L - 1))
         }
         return w
     }
@@ -180,17 +182,17 @@ class FFT(// -------------------------------------------------------------------
             // Create fake time series of size `inputLength`
             val values = DoubleArray(inputLength)
             for (i in 0 until inputLength) {
-                values[i] = Math.cos(i * 60 * 0.01745)
+                values[i] = cos(i * 60 * 0.01745)
             }
-            println(Arrays.toString(values))
+            println(values.contentToString())
 
             // Compute log PSD
-            val logpower = fft.computeLogPSD(values) //LogPSD
+            val logPower = fft.computeLogPSD(values) //LogPSD
 
             // Print values
-            println(Arrays.toString(logpower))
-            println(Arrays.toString(fft.freqBins))
-            println(Arrays.toString(fft.freqBins).length)
+            println(logPower.contentToString())
+            println(fft.freqBins.contentToString())
+            println(fft.freqBins.contentToString().length)
         }
     }
 

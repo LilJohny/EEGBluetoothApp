@@ -32,8 +32,8 @@ class SettingsFragment : Fragment() {
 
     private val resultsAdapter =
         ScanResultsAdapter {
-            var deviceFragment = DeviceFragment()
-            var args = Bundle()
+            val deviceFragment = DeviceFragment()
+            val args = Bundle()
             args.putString(EXTRA_MAC_ADDRESS, it.bleDevice.macAddress )
             deviceFragment.arguments = args
             activity?.supportFragmentManager?.beginTransaction()

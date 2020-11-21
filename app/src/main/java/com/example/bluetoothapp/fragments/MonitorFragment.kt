@@ -27,7 +27,7 @@ class MonitorFragment : Fragment(){
     }
     private var series1: LineGraphSeries<DataPoint>? = null
     private var lastX : Double = 0.0
-    private lateinit var line:List<String>
+    //private lateinit var line:List<String>
     private var i = 0
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val graph = this.view?.findViewById<View>(R.id.graph) as GraphView
@@ -47,15 +47,16 @@ class MonitorFragment : Fragment(){
 
     override fun onResume() {
         super.onResume()
-        Thread(Runnable {
+        Thread {
             for (i in 0..9999) {
                 activity?.runOnUiThread { addEntry() }
                 try {
                     //Thread.sleep(250)
-                } catch (e: InterruptedException) { //                        e.printStackTrace();
+                } catch (e: InterruptedException) {
+                    e.printStackTrace();
                 }
             }
-        }).start()
+        }.start()
     }
     private fun addEntry() {
         series1!!.appendData(
@@ -67,7 +68,7 @@ class MonitorFragment : Fragment(){
     }
     private fun nextDouble():Double{
 
-        return (RANDOM.nextDouble()*5.0).toDouble()
+        return (RANDOM.nextDouble()*5.0)
     }
 
 }

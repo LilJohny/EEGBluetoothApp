@@ -64,8 +64,8 @@ class ServiceDiscoveryFragment : Fragment() {
     private fun onAdapterItemClick(item: DiscoveryResultsAdapter.AdapterItem) {
         when (item.type) {
             DiscoveryResultsAdapter.AdapterItem.CHARACTERISTIC -> {
-                var characteristicOperationFragment = AdvancedCharacteristicOperationFragment()
-                var fragmentArgs = Bundle()
+                val characteristicOperationFragment = AdvancedCharacteristicOperationFragment()
+                val fragmentArgs = Bundle()
                 fragmentArgs.putString(EXTRA_MAC_ADDRESS, bleDevice.macAddress)
                 fragmentArgs.putString(EXTRA_CHARACTERISTIC_UUID, item.uuid.toString())
                 characteristicOperationFragment.arguments = fragmentArgs

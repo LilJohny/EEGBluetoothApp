@@ -34,7 +34,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 private const val EXTRA_MAC_ADDRESS = "extra_mac_address"
-private val TAG = "CharacteristicOperation"
+private const val TAG = "CharacteristicOperation"
 private const val EXTRA_CHARACTERISTIC_UUID = "extra_uuid"
 
 class AdvancedCharacteristicOperationFragment : Fragment() {
