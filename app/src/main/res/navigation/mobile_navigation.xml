@@ -21,5 +21,7 @@
         android:id="@+id/navigation_settings"
         android:name="com.example.bluetoothapp.fragments.SettingsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/activity_scan" />
+        tools:layout="@layout/fragment_settings" >
+    </fragment>
+
 </navigation>

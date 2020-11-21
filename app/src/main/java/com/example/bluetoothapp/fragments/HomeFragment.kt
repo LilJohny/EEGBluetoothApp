@@ -16,9 +16,4 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        //val navView = this.view?.findViewById<BottomNavigationView>(R.id.nav_view)
-        //view?.isActivated = false
-    }
 }

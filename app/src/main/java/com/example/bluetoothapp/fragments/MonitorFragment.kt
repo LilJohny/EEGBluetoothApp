@@ -41,7 +41,7 @@ class MonitorFragment : Fragment(){
         graph.title = "Data from EEG"
         graph.addSeries(series1)
         graph.viewport
-        line  = Writer.readFile(this.view!!.context.filesDir,"data.txt")[0].replace("[","").replace("]","").split(",")
+        //line  = Writer.readFile(this.view!!.context.filesDir,"data.txt")[0].replace("[","").replace("]","").split(",")
 
     }
 
@@ -67,7 +67,7 @@ class MonitorFragment : Fragment(){
     }
     private fun nextDouble():Double{
 
-        return RANDOM.nextDouble()*line[i].toDouble()
+        return (RANDOM.nextDouble()*5.0).toDouble()
     }
 
 }
