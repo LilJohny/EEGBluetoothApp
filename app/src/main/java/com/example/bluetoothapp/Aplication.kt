@@ -20,8 +20,7 @@ class SampleApplication : Application() {
             .setMacAddressLogSetting(LogConstants.MAC_ADDRESS_FULL)
             .setUuidsLogSetting(LogConstants.UUIDS_FULL)
             .setShouldLogAttributeValues(true)
-            .build()
+            .build())
 
-        )
     }
 }
