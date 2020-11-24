@@ -6,6 +6,7 @@
     app:startDestination="@+id/navigation_home">
 
     <fragment
+        android:icon="@drawable/remove_red_eye_black_18dp"
         android:id="@+id/navigation_home"
         android:name="com.example.bluetoothapp.fragments.HomeFragment"
         android:label="@string/title_home"

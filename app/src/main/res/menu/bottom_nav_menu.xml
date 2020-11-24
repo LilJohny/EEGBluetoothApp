@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/remove_red_eye_black_18dp"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_monitor"
-        android:icon="@drawable/ic_timeline_white_36dp"
+        android:icon="@drawable/king_bed_black_18dp"
         android:title="@string/monitor" />
 
     <item
         android:id="@+id/navigation_settings"
-        android:icon="@drawable/ic_settings_white_36dp"
+        android:icon="@drawable/app_settings_alt_black_18dp"
         android:title="@string/settings" />
 
 </menu>
