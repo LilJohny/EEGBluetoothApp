@@ -32,6 +32,7 @@ import kotlinx.android.synthetic.main.fragment_characteristics_operations.*
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.experimental.and
 
 private const val EXTRA_MAC_ADDRESS = "extra_mac_address"
 private const val TAG = "CharacteristicOperation"
@@ -39,11 +40,33 @@ private const val EXTRA_CHARACTERISTIC_UUID = "extra_uuid"
 
 class AdvancedCharacteristicOperationFragment : Fragment() {
     companion object {
+        private val hexArray = "0123456789ABCDEF".toCharArray()
 
-        fun littleEndianConversion(bytes: ByteArray): Int {
-            var result = 0
-            for (i in bytes.indices) {
-                result = result or (bytes[i].toInt() shl 8 * i)
+    fun bytesToHex(bytes: ByteArray): String {
+        val hexChars = CharArray(bytes.size * 2)
+        for (j in bytes.indices) {
+            val v = (bytes[j] and 0xFF.toByte()).toInt()
+            if(v==-1) {
+                hexChars[j * 2] = 'F'
+                hexChars[j * 2 + 1] = 'F'
+            } else {
+                hexChars[j * 2] = hexArray[v ushr 4]
+                hexChars[j * 2 + 1] = hexArray[v and 0x0F]
+            }
+        }
+        return String(hexChars)
+    }
+        fun littleEndianConversion(bytes: ByteArray): ArrayList<Double> {
+            var result = ArrayList<Double>()
+
+            for (i in 4 until 15 step 3) {
+                val channel_value_f = bytes[i];
+                val channel_value_s = bytes[i+1];
+                val channel_value_t = bytes[i+2];
+                val hexStr = bytesToHex( byteArrayOf(channel_value_f, channel_value_s, channel_value_t))
+                val valLong = hexStr.toLong(radix = 16);
+
+                result.add(valLong* ((2*4.5)/4/16777216))
             }
             return result
         }
@@ -56,14 +79,13 @@ class AdvancedCharacteristicOperationFragment : Fragment() {
     private val inputBytes: ByteArray
         get() = write_input.text.toString().toByteArray()
 
-    private var recievedValues = ArrayList<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        SampleApplication.values = ArrayList()
         return inflater.inflate(R.layout.fragment_characteristics_operations, container, false)
     }
 
@@ -189,8 +211,9 @@ class AdvancedCharacteristicOperationFragment : Fragment() {
             Type.WRITE -> showToastShort("Write success")
             Type.NOTIFY -> {
                 showToastShort("Notification: ${result.toByteArray().toHex()}")
-                recievedValues.add(littleEndianConversion((result.toByteArray())))
-                Writer.writeFile(recievedValues.toString(),filesDir, "data.txt")
+                SampleApplication.values.add(littleEndianConversion(result.toByteArray()))
+                //recievedValues.add(littleEndianConversion((result.toByteArray())))
+                //Writer.writeFile(recievedValues.toString(),filesDir, "data.txt")
 
                 //showToastShort(recievedValues.toString())
             }

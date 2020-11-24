@@ -10,17 +10,21 @@ class SampleApplication : Application() {
     companion object {
         lateinit var rxBleClient: RxBleClient
             private set
+        lateinit var values: ArrayList<ArrayList<Double>>
+
     }
 
     override fun onCreate() {
         super.onCreate()
         rxBleClient = RxBleClient.create(this)
-        RxBleClient.updateLogOptions(LogOptions.Builder()
-            .setLogLevel(LogConstants.INFO)
-            .setMacAddressLogSetting(LogConstants.MAC_ADDRESS_FULL)
-            .setUuidsLogSetting(LogConstants.UUIDS_FULL)
-            .setShouldLogAttributeValues(true)
-            .build())
+        RxBleClient.updateLogOptions(
+            LogOptions.Builder()
+                .setLogLevel(LogConstants.INFO)
+                .setMacAddressLogSetting(LogConstants.MAC_ADDRESS_FULL)
+                .setUuidsLogSetting(LogConstants.UUIDS_FULL)
+                .setShouldLogAttributeValues(true)
+                .build()
+        )
 
     }
 }

@@ -3,6 +3,7 @@ package com.example.bluetoothapp.presenters
 import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattCharacteristic.PROPERTY_INDICATE
 import android.bluetooth.BluetoothGattCharacteristic.PROPERTY_NOTIFY
+import android.icu.util.TimeUnit
 import com.example.bluetoothapp.utils.hasProperty
 import com.polidea.rxandroidble2.NotificationSetupMode
 import com.polidea.rxandroidble2.RxBleConnection
