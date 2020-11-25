@@ -1,8 +1,12 @@
 package com.example.bluetoothapp.transformations
-
+import kotlinx.android.synthetic.main.fragment_eyes_state.*
 import android.os.Build
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import classifier.FFT
+import com.example.bluetoothapp.R
+import com.example.bluetoothapp.SampleApplication
+import kotlinx.android.synthetic.main.fragment_eyes_state.view.*
 import java.util.*
 import kotlin.math.cos
 import kotlin.math.sin
@@ -131,6 +135,7 @@ class SleepStageClassifier(/*
                 break
             }
         }
+        SampleApplication.eyesOpen = state
         return state
     }
 

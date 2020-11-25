@@ -20,7 +20,7 @@ class MonitorFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_monitor, container, false)
+        return inflater.inflate(R.layout.fragment_sleep_stage, container, false)
     }
     companion object {
         private val RANDOM = Random()

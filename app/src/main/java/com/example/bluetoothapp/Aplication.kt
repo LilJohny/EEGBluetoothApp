@@ -11,6 +11,7 @@ class SampleApplication : Application() {
         lateinit var rxBleClient: RxBleClient
             private set
         lateinit var values: ArrayList<ArrayList<Double>>
+        var eyesOpen = "awake"
 
     }
 
